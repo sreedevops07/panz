@@ -35,5 +35,13 @@ pipeline {
 	  '''
      }   
    }
+    stage('ecs deploy') {
+      steps {
+        sh '''
+          chmod +x changebuildnumber.sh
+          ./changebuildnumber.sh $BUILD_NUMBER
+          '''
+     }    
+    }
 }
 }
