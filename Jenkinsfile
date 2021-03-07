@@ -40,6 +40,7 @@ pipeline {
         sh '''
           chmod +x changebuildnumber.sh
           ./changebuildnumber.sh $BUILD_NUMBER
+	  sh -x ecs-auto.sh
           '''
      }    
     }
