@@ -8,7 +8,6 @@ pipeline {
       steps {
         sh '''
          echo Restore started on `date`.
-         dotnet tool install --global dotnet-sonarscanner
          dotnet sonarscanner begin /k:"sample" /d:sonar.host.url=$sonar_url /d:sonar.login=$token
          dotnet restore panz.csproj
          dotnet build panz.csproj -c Release
