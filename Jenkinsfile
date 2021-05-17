@@ -4,15 +4,18 @@ pipeline {
     pollSCM '* * * * *'
   }
   stages {
-    stage('Dotnet Restore') {
+    stage('SonarQube Analysis') {
       steps {
-        sh 'dotnet restore panz.csproj'
+        sh '''
+         echo Restore started on `date`.
+         dotnet tool install --global dotnet-sonarscanner
+         dotnet sonarscanner begin /k:"sample" /d:sonar.host.url=$sonar_url /d:sonar.login=$token
+         dotnet restore panz.csproj
+         dotnet build panz.csproj -c Release
+         dotnet sonarscanner end /d:sonar.login=$token 
+        
+        '''
       }
-    }
-    stage('Dotnet Build') {
-      steps {
-        sh 'dotnet build panz.csproj -c Release' 
-     }   
     }
     stage('Dotnet Publish') {
       steps {
@@ -22,8 +25,8 @@ pipeline {
    stage('Docker build and push') {
       steps {
         sh '''
-          whoami
-          echo $access_key
+         whoami
+         echo $access_key
          aws configure set aws_access_key_id $access_key
          aws configure set aws_secret_access_key $secret_key
          aws configure set default.region ap-south-1
