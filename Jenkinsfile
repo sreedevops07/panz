@@ -49,12 +49,12 @@ pipeline {
 }
 post {
     failure {
-        mail to: 'phaninani12374@gmail.com',
+        mail to: 'unsolveddevops@gmail.com',
              subject: "Failed Pipeline: ${BUILD_NUMBER}",
              body: "Something is wrong with ${env.BUILD_URL}"
     }
      success {
-        mail to: 'phaninani12374@gmail.com',
+        mail to: 'unsolveddevops@gmail.com',
              subject: "successful Pipeline:  ${env.BUILD_NUMBER}",
              body: "Your pipeline is success ${env.BUILD_URL}"
     }
