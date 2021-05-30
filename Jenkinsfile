@@ -4,18 +4,18 @@ pipeline {
     pollSCM '* * * * *'
   }
   stages {
-    stage('SonarQube Analysis') {
-      steps {
-        sh '''
-         echo Restore started on `date`.
-         dotnet sonarscanner begin /k:"sample" /d:sonar.host.url=$sonar_url /d:sonar.login=$token
-         dotnet restore panz.csproj
-         dotnet build panz.csproj -c Release
-         dotnet sonarscanner end /d:sonar.login=$token 
+//     stage('SonarQube Analysis') {
+//       steps {
+//         sh '''
+//          echo Restore started on `date`.
+//          dotnet sonarscanner begin /k:"sample" /d:sonar.host.url=$sonar_url /d:sonar.login=$token
+//          dotnet restore panz.csproj
+//          dotnet build panz.csproj -c Release
+//          dotnet sonarscanner end /d:sonar.login=$token 
         
-        '''
-      }
-    }
+//         '''
+//       }
+//     }
     stage('Dotnet Publish') {
       steps {
         sh 'dotnet publish panz.csproj -c Release'
