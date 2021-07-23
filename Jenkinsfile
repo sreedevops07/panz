@@ -7,6 +7,7 @@ pipeline {
     stage('SonarQube Analysis') {
       steps {
         sh '''
+	 whoami
 	 export PATH=${PATH}:${HOME}/.dotnet/tools
          echo Restore started on `date`.
          dotnet sonarscanner begin /k:"sample" /d:sonar.host.url=$sonar_url /d:sonar.login=$token
