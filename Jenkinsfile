@@ -26,7 +26,7 @@ pipeline {
         sh '''
          whoami
 	 echo $access_key
-         DOCKER_LOGIN_PASSWORD=$(aws ecr get-login-password  --region us-east-1a)
+         DOCKER_LOGIN_PASSWORD=$(aws ecr get-login-password  --region us-east-1)
          docker login -u AWS -p $DOCKER_LOGIN_PASSWORD https://190490853041.dkr.ecr.us-east-1.amazonaws.com
          docker build -t 190490853041.dkr.ecr.us-east-1.amazonaws.com/gang:SAMPLE-PROJECT-${BUILD_NUMBER} .
          docker push 190490853041.dkr.ecr.us-east-1.amazonaws.com/gang:SAMPLE-PROJECT-${BUILD_NUMBER}
