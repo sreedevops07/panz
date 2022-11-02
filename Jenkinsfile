@@ -8,6 +8,7 @@ pipeline {
       steps {
         sh '''
 	 whoami
+	 export PATH=$PATH/root/.dotnet/tools
 	 echo $PATH
          sudo dotnet sonarscanner begin /k:"sreedevops" /d:sonar.host.url=https://sonarcloud.io /d:sonar.login="45f927d889580dfb430a5e0b35a87b544ac551de"
          dotnet build panz.csproj -c Release
