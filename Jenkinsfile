@@ -9,9 +9,10 @@ pipeline {
         sh '''
 	 whoami
 	 echo $PATH
-         echo Restore started on `date`.
-         dotnet restore panz.csproj
+	 dotnet tool install --global dotnet-sonarscanner
+         dotnet sonarscanner begin /k:"sreedevops" /d:sonar.host.url=https://sonarcloud.io /d:sonar.login="45f927d889580dfb430a5e0b35a87b544ac551de"
          dotnet build panz.csproj -c Release
+        dotnet sonarscanner end /d:sonar.login="45f927d889580dfb430a5e0b35a87b544ac551de"
         
         '''
       }
